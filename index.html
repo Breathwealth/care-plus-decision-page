@@ -165,9 +165,85 @@
       line-height: 1;
       color: rgba(255, 255, 255, 0.18);
     }
+    .lock-screen {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+      background:
+        radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), transparent 24%),
+        radial-gradient(circle at bottom right, rgba(37, 99, 235, 0.2), transparent 22%),
+        linear-gradient(135deg, #020617, #0f172a 48%, #082f49);
+    }
+    .lock-card {
+      width: 100%;
+      max-width: 34rem;
+      padding: 2.5rem;
+      border-radius: 2rem;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.06));
+      box-shadow: 0 24px 90px rgba(2, 6, 23, 0.38);
+      backdrop-filter: blur(18px);
+    }
+    .lock-input {
+      width: 100%;
+      border: 1px solid rgba(148, 163, 184, 0.24);
+      background: rgba(255, 255, 255, 0.9);
+      color: #0f172a;
+      border-radius: 1rem;
+      padding: 1rem 1.1rem;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      outline: none;
+    }
+    .lock-input:focus {
+      border-color: rgba(96, 165, 250, 0.9);
+      box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.18);
+    }
+    .lock-button {
+      width: 100%;
+      border: 0;
+      border-radius: 1rem;
+      padding: 1rem 1.25rem;
+      background: linear-gradient(135deg, #2563eb, #14b8a6);
+      color: white;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform 180ms ease, box-shadow 180ms ease;
+      box-shadow: 0 20px 40px rgba(37, 99, 235, 0.28);
+    }
+    .lock-button:hover {
+      transform: translateY(-1px);
+    }
+    .site-shell[hidden],
+    .lock-screen[hidden] {
+      display: none;
+    }
   </style>
 </head>
 <body class="text-slate-800 font-sans antialiased leading-relaxed">
+  <section id="lock-screen" class="lock-screen">
+    <div class="lock-card text-center text-white">
+      <div class="inline-flex items-center rounded-full border border-white/10 bg-white/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.28em] text-blue-100">
+        Care+ Internal Access
+      </div>
+      <h1 class="mt-6 font-serif text-4xl md:text-5xl font-black">Care+ 內創提案</h1>
+      <p class="mt-4 text-blue-100 text-lg">限本人查看｜請輸入通關碼</p>
+      <p class="mt-3 text-slate-300">看完這份，就決定要不要讓 Eric 開做。</p>
+      <form id="lock-form" class="mt-8 space-y-4">
+        <input id="passcode-input" class="lock-input" type="password" placeholder="輸入通關碼" autocomplete="off" />
+        <button class="lock-button" type="submit">進入提案</button>
+        <p id="lock-error" class="text-sm text-rose-300 h-5"></p>
+      </form>
+    </div>
+  </section>
+
+  <div id="site-shell" class="site-shell" hidden>
 
   <nav class="sticky top-0 z-50 border-b border-white/10 bg-slate-950/82 text-white shadow-md backdrop-blur-xl">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
@@ -524,8 +600,77 @@
       <div class="mt-8 text-xs uppercase tracking-[0.28em] text-slate-500">Care+ First Gate Proposal</div>
     </div>
   </footer>
+  </div>
 
   <script>
+    const PASSCODE = "ERICGO";
+    let chartsInitialized = false;
+
+    function initCharts() {
+      if (chartsInitialized) return;
+      chartsInitialized = true;
+
+      const ctxLeakage = document.getElementById("leakageChart").getContext("2d");
+      const labelsLeakage = wrapLabels([
+        "補貨中斷 Refill Interruption",
+        "沉睡用戶 Dormant Users",
+        "相容性錯買 Wrong-SKU",
+        "未擴張品類 Missed Category"
+      ]);
+
+      new Chart(ctxLeakage, {
+        type: "doughnut",
+        data: {
+          labels: labelsLeakage,
+          datasets: [{
+            data: [40, 25, 20, 15],
+            backgroundColor: ["#e11d48", "#f97316", "#f59e0b", "#14b8a6"],
+            borderWidth: 0,
+            hoverOffset: 10
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          cutout: "65%",
+          plugins: {
+            legend: {
+              position: "right",
+              labels: { font: { family: "sans-serif", size: 13 } }
+            },
+            tooltip: commonTooltipConfig
+          }
+        }
+      });
+    }
+
+    function unlockSite() {
+      document.getElementById("lock-screen").hidden = true;
+      document.getElementById("site-shell").hidden = false;
+      sessionStorage.setItem("carePlusUnlocked", "true");
+      initCharts();
+      window.scrollTo({ top: 0, behavior: "auto" });
+    }
+
+    function checkSavedAccess() {
+      if (sessionStorage.getItem("carePlusUnlocked") === "true") {
+        unlockSite();
+      }
+    }
+
+    document.getElementById("lock-form").addEventListener("submit", function (event) {
+      event.preventDefault();
+      const input = document.getElementById("passcode-input");
+      const error = document.getElementById("lock-error");
+      if (input.value.trim().toUpperCase() === PASSCODE) {
+        error.textContent = "";
+        unlockSite();
+        return;
+      }
+      error.textContent = "通關碼不正確";
+      input.select();
+    });
+
     function wrapLabels(labels) {
       return labels.map((label) => {
         if (typeof label !== "string") return label;
@@ -556,38 +701,8 @@
       }
     };
 
-    const ctxLeakage = document.getElementById("leakageChart").getContext("2d");
-    const labelsLeakage = wrapLabels([
-      "補貨中斷 Refill Interruption",
-      "沉睡用戶 Dormant Users",
-      "相容性錯買 Wrong-SKU",
-      "未擴張品類 Missed Category"
-    ]);
+    checkSavedAccess();
 
-    new Chart(ctxLeakage, {
-      type: "doughnut",
-      data: {
-        labels: labelsLeakage,
-        datasets: [{
-          data: [40, 25, 20, 15],
-          backgroundColor: ["#e11d48", "#f97316", "#f59e0b", "#14b8a6"],
-          borderWidth: 0,
-          hoverOffset: 10
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        cutout: "65%",
-        plugins: {
-          legend: {
-            position: "right",
-            labels: { font: { family: "sans-serif", size: 13 } }
-          },
-          tooltip: commonTooltipConfig
-        }
-      }
-    });
   </script>
 </body>
 </html>
