@@ -42,9 +42,9 @@
     }
     body {
       background:
-        radial-gradient(circle at top left, rgba(59, 130, 246, 0.16), transparent 28%),
-        radial-gradient(circle at top right, rgba(14, 165, 233, 0.18), transparent 24%),
-        linear-gradient(180deg, #f8fbff 0%, var(--page-bg) 40%, #eef4fb 100%);
+        radial-gradient(circle at top left, rgba(15, 23, 42, 0.04), transparent 28%),
+        radial-gradient(circle at top right, rgba(30, 64, 175, 0.08), transparent 20%),
+        linear-gradient(180deg, #f6f8fb 0%, #eef2f7 42%, #e9eef5 100%);
       color: var(--ink);
     }
     .chart-container {
@@ -82,17 +82,17 @@
       box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06);
     }
     .glass-panel {
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.08));
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      box-shadow: 0 24px 80px rgba(2, 6, 23, 0.24);
-      backdrop-filter: blur(18px);
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.36), rgba(15, 23, 42, 0.22));
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 24px 80px rgba(2, 6, 23, 0.18);
+      backdrop-filter: blur(14px);
     }
     .section-shell {
       position: relative;
       overflow: hidden;
       border: 1px solid var(--line);
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.72));
-      box-shadow: 0 24px 70px rgba(15, 23, 42, 0.08);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(249, 250, 251, 0.9));
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.06);
     }
     .section-shell::after {
       content: "";
@@ -129,8 +129,8 @@
       position: relative;
       overflow: hidden;
       border: 1px solid rgba(255, 255, 255, 0.12);
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.08));
-      backdrop-filter: blur(10px);
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.34), rgba(15, 23, 42, 0.2));
+      backdrop-filter: blur(8px);
     }
     .metric-card::after {
       content: "";
@@ -161,9 +161,9 @@
     }
     .quote-mark {
       font-family: "Noto Serif TC", serif;
-      font-size: 5rem;
+      font-size: 4rem;
       line-height: 1;
-      color: rgba(255, 255, 255, 0.18);
+      color: rgba(255, 255, 255, 0.12);
     }
     .lock-screen {
       min-height: 100vh;
@@ -253,26 +253,26 @@
 
   <div id="site-shell" class="site-shell" hidden>
 
-  <nav class="sticky top-0 z-50 border-b border-white/10 bg-slate-950/82 text-white shadow-md backdrop-blur-xl">
+  <nav class="sticky top-0 z-50 border-b border-slate-800 bg-slate-950/95 text-white shadow-sm backdrop-blur-md">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
       <div>
-        <div class="font-serif text-xl tracking-wide">Care+ Decision Page</div>
-        <div class="text-[11px] uppercase tracking-[0.28em] text-slate-400">Internal Venture Proposal</div>
+        <div class="font-serif text-xl tracking-wide text-slate-100">Care+ Decision Page</div>
+        <div class="text-[11px] uppercase tracking-[0.28em] text-slate-500">Internal Venture Proposal</div>
       </div>
-      <div class="hidden md:flex space-x-6 text-sm font-medium text-slate-300">
-        <a href="#decision" class="hover:text-white transition">今天的決策</a>
-        <a href="#problem" class="hover:text-white transition">核心漏水</a>
-        <a href="#phase1" class="hover:text-white transition">第一關</a>
-        <a href="#roadmap" class="hover:text-white transition">四階段路線</a>
-        <a href="#proposal" class="hover:text-white transition">內創結構</a>
+      <div class="hidden md:flex space-x-6 text-sm font-medium text-slate-400">
+        <a href="#decision" class="hover:text-slate-100 transition">今天的決策</a>
+        <a href="#problem" class="hover:text-slate-100 transition">核心漏水</a>
+        <a href="#phase1" class="hover:text-slate-100 transition">第一關</a>
+        <a href="#roadmap" class="hover:text-slate-100 transition">四階段路線</a>
+        <a href="#proposal" class="hover:text-slate-100 transition">內創結構</a>
       </div>
     </div>
   </nav>
 
-  <header class="bg-gradient-to-br from-slate-950 via-sky-950 to-blue-900 text-white py-20 md:py-24 px-4 sm:px-6 lg:px-8 text-center relative overflow-hidden">
+  <header class="bg-[linear-gradient(135deg,_#07111f,_#0f243f_55%,_#16365a)] text-white py-20 md:py-24 px-4 sm:px-6 lg:px-8 text-center relative overflow-hidden">
     <div class="mesh-band"></div>
-    <div class="absolute -top-16 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-cyan-400/15 blur-3xl"></div>
-    <div class="absolute bottom-0 right-0 h-80 w-80 rounded-full bg-blue-500/10 blur-3xl"></div>
+    <div class="absolute -top-16 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-sky-500/10 blur-3xl"></div>
+    <div class="absolute bottom-0 right-0 h-80 w-80 rounded-full bg-blue-700/10 blur-3xl"></div>
     <div class="max-w-5xl mx-auto relative z-10">
       <div class="inline-block bg-white/10 text-blue-100 text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-[0.3em] mb-6 border border-white/15">
         Internal Venture Proposal
@@ -286,8 +286,8 @@
       </p>
 
       <div id="decision" class="glass-panel rounded-[2rem] p-6 md:p-8 text-left max-w-4xl mx-auto">
-        <div class="quote-mark mb-2">“</div>
-        <p class="text-lg md:text-[1.1rem] text-blue-50 leading-relaxed font-medium -mt-5">
+        <div class="quote-mark mb-3">“</div>
+        <p class="text-lg md:text-[1.1rem] text-slate-100 leading-relaxed font-medium">
           今天不是在看一個功能案，也不是在批一個燒錢專案。<br><br>
           今天在決定的，是要不要用一個 12 個月、可驗收、可停損的結構，
           先把子公司正在流失的補貨收入接回來，順便測試這件事能不能長成集團的新能力。<br><br>
@@ -340,7 +340,7 @@
           </div>
         </div>
 
-        <div class="bg-[linear-gradient(135deg,_#0f172a,_#1e3a8a,_#0f766e)] rounded-[2rem] p-8 md:p-10 text-white shadow-aura">
+        <div class="bg-[linear-gradient(135deg,_#0f172a,_#182235_58%,_#1f4b63)] rounded-[2rem] p-8 md:p-10 text-white shadow-aura">
           <div class="eyebrow mb-4">Operator Fit</div>
           <h2 class="font-serif text-3xl md:text-4xl font-bold mb-4">這個案子最關鍵的，不只是對價，而是誰有能力在低資源下把第一關做成</h2>
           <p class="max-w-3xl text-blue-50/90 text-lg leading-relaxed">
@@ -466,7 +466,7 @@
     </section>
 
     <section class="scroll-mt-24">
-      <div class="bg-[radial-gradient(circle_at_top_left,_rgba(59,130,246,0.22),_transparent_24%),linear-gradient(135deg,_#020617,_#0f172a_50%,_#0b3b66)] text-white rounded-[2rem] p-8 md:p-12 shadow-aura border border-white/10">
+      <div class="bg-[radial-gradient(circle_at_top_left,_rgba(59,130,246,0.12),_transparent_22%),linear-gradient(135deg,_#0b1220,_#111b2d_52%,_#173047)] text-white rounded-[2rem] p-8 md:p-12 shadow-aura border border-white/10">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
           <div>
             <div class="eyebrow mb-4">Why Now</div>
@@ -504,8 +504,8 @@
         </p>
       </div>
 
-      <div class="bg-[linear-gradient(135deg,_#1d4ed8,_#0f766e)] rounded-[2rem] p-8 md:p-12 text-white shadow-aura relative overflow-hidden">
-        <div class="absolute inset-y-0 right-0 w-1/2 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.16),_transparent_60%)]"></div>
+      <div class="bg-[linear-gradient(135deg,_#14304f,_#17375a_52%,_#1b4d5a)] rounded-[2rem] p-8 md:p-12 text-white shadow-aura relative overflow-hidden">
+        <div class="absolute inset-y-0 right-0 w-1/2 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.08),_transparent_60%)]"></div>
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
           <div class="lg:col-span-1">
             <h3 class="font-serif text-2xl md:text-3xl font-bold mb-4">第一關只做一件值得做的事</h3>
