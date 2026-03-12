@@ -252,7 +252,8 @@
       border: 1px solid rgba(255, 255, 255, 0.12);
     }
     .decision-tab {
-      width: 100%;
+      width: auto;
+      min-width: 13rem;
       text-align: left;
       padding: 1rem 1.05rem;
       border-radius: 1.25rem;
@@ -355,6 +356,18 @@
       background: radial-gradient(circle, rgba(20, 184, 166, 0.12), transparent 68%);
       pointer-events: none;
     }
+    .decision-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      justify-content: center;
+    }
+    @media (max-width: 768px) {
+      .decision-tab {
+        width: 100%;
+        min-width: 0;
+      }
+    }
   </style>
 </head>
 <body class="text-slate-800 font-sans antialiased leading-relaxed">
@@ -419,10 +432,10 @@
       <div id="decision" class="glass-panel rounded-[2rem] p-6 md:p-8 text-left max-w-4xl mx-auto">
         <div class="quote-mark mb-3">“</div>
         <p class="text-lg md:text-[1.1rem] text-slate-100 leading-relaxed font-medium">
-          這次提案真正希望公司決定的，不是是否為 Eric 另開一個特殊工作安排，
-          而是是否正式投資一位已在第一線獨立經營多年、且已被現場淬鍊成熟的人，
+          這次提案真正希望公司決定的，不是是否為我另開一個特殊工作安排，
+          而是是否正式投資一個已在第一線獨立經營多年、且已被現場淬鍊成熟的能力，
           用 12 個月、可驗收、可停損的方式，替 Care+ 跑出第一關。<br><br>
-          Eric 過去幾年本就持續在總部外主責北美電商；
+          我過去幾年本就持續在總部外主責北美電商；
           因此，公司今天不是在承擔新的體制成本，而是在既有工作現實下，
           買下一個有機會先替子公司止血、再為集團打開新能力入口的試點。<br><br>
           <span class="font-bold text-white">今天不是在談例外，而是在決定要不要正式投資第一關。</span>
@@ -471,13 +484,8 @@
       </div>
 
       <div class="mt-8 flex flex-col items-center gap-4">
-        <div class="flex flex-wrap items-center justify-center gap-3">
-          <span class="focus-chip">陳總先看現在值不值得 Go</span>
-          <span class="focus-chip">Sophia 先看這會不會先幫到子公司</span>
-          <span class="focus-chip">再看為什麼第一關更適合由 Eric 獨立推進</span>
-        </div>
         <div class="flex flex-col sm:flex-row gap-3">
-          <a href="#decision-flow" class="cta-button cta-primary">先看今天要不要 Go</a>
+          <a href="#decision-flow" class="cta-button cta-primary">直接看今天的決策</a>
           <a href="#problem" class="cta-button cta-secondary">再看第一關到底在解什麼</a>
         </div>
       </div>
@@ -487,37 +495,35 @@
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-20">
     <section id="decision-flow" class="scroll-mt-24">
       <div class="decision-shell p-8 md:p-10">
-        <div class="grid grid-cols-1 lg:grid-cols-[320px_minmax(0,1fr)] gap-8 lg:gap-10 items-start">
-          <div>
-            <div class="eyebrow mb-4">Decision Flow</div>
-            <h2 class="font-serif text-3xl md:text-4xl font-bold text-slate-900 mb-4">先不用一次看完整頁，先看你今天要不要按 Go</h2>
-            <p class="text-slate-600 text-lg leading-relaxed">
-              這裡先把三個最核心的判斷拆開：值不值得先做、Sophia 會不會先得到幫助、以及為什麼第一關更適合由 Eric 用獨立節奏把它跑通。
-            </p>
-            <div class="mt-6 space-y-3">
-              <button type="button" class="decision-tab is-active" data-panel="overview">
-                <div class="text-xs uppercase tracking-[0.24em] text-slate-400 mb-2">先看結論</div>
-                <div class="font-semibold text-slate-900">今天真正要決定的是不是讓第一關開始</div>
-                <div class="mt-2 text-sm text-slate-600">先看一遍這件事到底是不是現在最值得買下來的入口。</div>
-              </button>
-              <button type="button" class="decision-tab" data-panel="chairman">
-                <div class="text-xs uppercase tracking-[0.24em] text-slate-400 mb-2">陳總視角</div>
-                <div class="font-semibold text-slate-900">這是不是現在很適合先做的一步</div>
-                <div class="mt-2 text-sm text-slate-600">先看它離客人、現金流、驗收到底有多近。</div>
-              </button>
-              <button type="button" class="decision-tab" data-panel="sophia">
-                <div class="text-xs uppercase tracking-[0.24em] text-slate-400 mb-2">Sophia 視角</div>
-                <div class="font-semibold text-slate-900">這會不會先幫到子公司，而不是多一個包袱</div>
-                <div class="mt-2 text-sm text-slate-600">先看她每天都在接的 supply 問題，這件事到底有沒有先接起來。</div>
-              </button>
-              <button type="button" class="decision-tab" data-panel="eric">
-                <div class="text-xs uppercase tracking-[0.24em] text-slate-400 mb-2">Why Eric</div>
-                <div class="font-semibold text-slate-900">為什麼第一關更適合用獨立節奏跑，而不是拉回組織慢慢磨</div>
-                <div class="mt-2 text-sm text-slate-600">先看他為什麼不是一般人力替代，而是最適合先把路踩出來的人。</div>
-              </button>
-            </div>
-          </div>
+        <div class="max-w-4xl mx-auto text-center">
+          <div class="eyebrow mb-4">今天的決策</div>
+          <h2 class="font-serif text-3xl md:text-5xl font-bold text-slate-900 mb-4">今天真正要決定的，是不是讓第一關正式開始</h2>
+          <p class="text-slate-600 text-lg md:text-xl leading-relaxed max-w-3xl mx-auto">
+            這不是在看我要不要多一個例外安排，而是在看公司要不要在既有工作現實下，
+            正式投資一個已成熟的一線能力，先替 Care+ 把第一關跑出來。
+          </p>
+        </div>
 
+        <div class="decision-nav mt-8">
+          <button type="button" class="decision-tab is-active" data-panel="overview">
+            <div class="text-xs uppercase tracking-[0.24em] text-slate-400 mb-2">先看結論</div>
+            <div class="font-semibold text-slate-900">這是不是現在最值得買下來的一步</div>
+          </button>
+          <button type="button" class="decision-tab" data-panel="chairman">
+            <div class="text-xs uppercase tracking-[0.24em] text-slate-400 mb-2">陳總視角</div>
+            <div class="font-semibold text-slate-900">為什麼這會是很適合先做的一步</div>
+          </button>
+          <button type="button" class="decision-tab" data-panel="sophia">
+            <div class="text-xs uppercase tracking-[0.24em] text-slate-400 mb-2">Sophia 視角</div>
+            <div class="font-semibold text-slate-900">為什麼這先幫到子公司，不是多一個包袱</div>
+          </button>
+          <button type="button" class="decision-tab" data-panel="eric">
+            <div class="text-xs uppercase tracking-[0.24em] text-slate-400 mb-2">執行角色</div>
+            <div class="font-semibold text-slate-900">為什麼第一關更適合由我來跑</div>
+          </button>
+        </div>
+
+        <div class="mt-8 max-w-5xl mx-auto">
           <div class="space-y-4">
             <div class="decision-panel is-active" data-panel="overview">
               <div class="section-shell rounded-[2rem] p-8 md:p-10">
@@ -566,10 +572,10 @@
 
             <div class="decision-panel" data-panel="eric">
               <div class="bg-[linear-gradient(135deg,_#0f172a,_#182235_58%,_#1f4b63)] rounded-[2rem] p-8 md:p-10 text-white shadow-aura">
-                <div class="eyebrow mb-4">Why Eric</div>
-                <h3 class="font-serif text-3xl md:text-4xl font-bold mb-4">這不是在替 Eric 另開例外，而是在正式投資一個已成熟的前線能力</h3>
+                <div class="eyebrow mb-4">執行角色</div>
+                <h3 class="font-serif text-3xl md:text-4xl font-bold mb-4">這不是在替我另開例外，而是在正式投資一個已成熟的前線能力</h3>
                 <p class="max-w-3xl text-blue-50/90 text-lg leading-relaxed">
-                  Eric 過去幾年本就持續在第一線、以高度自主節奏主責北美電商。今天要判斷的，不是要不要為他另開一個特殊安排，而是要不要把這個已被現場淬鍊成熟的能力，正式用在 Care+ 第一關上，並讓它進入可驗收、可停損的投資框架。
+                  我過去幾年本就持續在第一線、以高度自主節奏主責北美電商。今天要判斷的，不是要不要為我另開一個特殊安排，而是要不要把這個已被現場淬鍊成熟的能力，正式用在 Care+ 第一關上，並讓它進入可驗收、可停損的投資框架。
                 </p>
                 <div class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <div class="rounded-2xl bg-white/10 border border-white/10 p-5">
@@ -589,13 +595,13 @@
                   </div>
                 </div>
                 <div class="mt-5 rounded-2xl border border-white/10 bg-black/15 p-5 text-blue-50 leading-relaxed">
-                  這裡真正要判斷的，不是 Eric 便不便宜，而是公司要不要用相對低新增成本，正式投資一位已把客人、流程與商轉路徑看清楚的人，替 Care+ 把第一關做成。
+                  這裡真正要判斷的，不是我是不是在爭取一種更自由的工作方式，而是公司要不要用相對低新增成本，正式投資一個已把客人、流程與商轉路徑看清楚的人，替 Care+ 把第一關做成。
                 </div>
                 <div class="mt-4 rounded-2xl border border-white/10 bg-slate-950/20 p-5 text-blue-50 leading-relaxed">
-                  更直接地說，公司今天買的不是把 Eric 從原本業務抽離，而是在他持續扛北美電商的同時，不必再另外拉一組工程、行銷、法規、客服與跨部門協調人力進場。
+                  更直接地說，公司今天買的不是把我從原本業務抽離，而是在我持續扛北美電商的同時，不必再另外拉一組工程、行銷、法規、客服與跨部門協調人力進場。
                 </div>
                 <div class="mt-4 rounded-2xl border border-white/10 bg-slate-950/30 p-5 text-blue-50 leading-relaxed">
-                  而這個安排成立的前提，就是 Eric 必須維持專責與專注。這類第一關要跑得快，通常也更適合維持既有的獨立推進節奏，而不是重新嵌回常規內部協作；如果把他拉回內部慢下來，買到的就不會是現在這個效率模型。
+                  而這個安排成立的前提，就是我必須維持專責與專注。這類第一關要跑得快，通常也更適合維持既有的獨立推進節奏，而不是重新嵌回常規內部協作；如果把我拉回內部慢下來，買到的就不會是現在這個效率模型。
                 </div>
               </div>
             </div>
