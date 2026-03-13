@@ -276,6 +276,46 @@
     .decision-panel.is-active {
       display: block;
     }
+    .approval-dock {
+      border-radius: 2rem;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      background:
+        radial-gradient(circle at top right, rgba(37, 99, 235, 0.10), transparent 22%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(248, 250, 252, 0.96));
+      box-shadow: 0 26px 60px rgba(15, 23, 42, 0.08);
+    }
+    .approval-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.7rem;
+      border-radius: 9999px;
+      padding: 0.95rem 1.3rem;
+      font-size: 0.95rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+    }
+    .approval-button:hover {
+      transform: translateY(-1px);
+    }
+    .approval-button-primary {
+      background: linear-gradient(135deg, #0f172a, #1d4ed8 62%, #0f766e);
+      color: #f8fafc;
+      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.18);
+    }
+    .approval-button-secondary {
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      background: rgba(255, 255, 255, 0.9);
+      color: #0f172a;
+      box-shadow: 0 14px 34px rgba(15, 23, 42, 0.06);
+    }
+    .approval-status {
+      min-height: 1.5rem;
+      color: #1d4ed8;
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
     .focus-chip {
       display: inline-flex;
       align-items: center;
@@ -976,16 +1016,26 @@
         </p>
       </div>
 
-        <div class="mt-8 section-shell rounded-[2rem] p-8 md:p-10">
-          <div class="eyebrow mb-4">決策後續口徑</div>
-          <h3 class="font-serif text-3xl md:text-4xl font-bold text-slate-900 mb-4">如果陳總決定往下走，後續口徑可以很簡單</h3>
-        <div class="rounded-[1.5rem] bg-slate-950 p-6 md:p-8 text-slate-100">
-          <p class="leading-relaxed">
-            Go.<br><br>
-            請 HR 依本提案啟動 Eric 的 12 個月內創結構與對應撥款，並以此作為 Eric 接下來 12 個月專責推進第一關的固定對價。<br>
-            在此期間，Eric 持續扛北美電商主責，並以第一關為新增主導目標，不再以額外零碎內部工作切割主要時間，且維持獨立推進節奏。<br>
-            由 Eric 負責 Care+ 第一關，並由子公司 CEO Sophia 依既定驗收指標複查。<br>
-            第一關先把試片耗材回補與收入回收做出來；Sophia 複查後，再由我決定是否進入下一階段。
+      <div class="mt-8 approval-dock p-8 md:p-10">
+        <div class="eyebrow mb-4">一鍵開啟後續</div>
+        <h3 class="font-serif text-3xl md:text-4xl font-bold text-slate-900 mb-4">如果決定 go，後續不用自己重寫</h3>
+        <p class="text-lg text-slate-600 max-w-3xl leading-relaxed">
+          想往下走時，不需要再自己整理一句批准話術。下面兩個動作已經把最順的後續接好了：一個直接開啟郵件草稿，一個直接複製核准文字。
+        </p>
+        <div class="mt-8 flex flex-col sm:flex-row gap-3">
+          <button type="button" id="open-approval-draft" class="approval-button approval-button-primary">開啟核准信草稿</button>
+          <button type="button" id="copy-approval-text" class="approval-button approval-button-secondary">複製核准文字</button>
+        </div>
+        <div id="approval-status" class="approval-status mt-4" aria-live="polite"></div>
+        <div class="mt-6 rounded-[1.5rem] bg-slate-950 p-6 md:p-8 text-slate-100">
+          <p id="approval-preview" class="leading-relaxed whitespace-pre-line">Go.
+
+請 HR 依本提案啟動 Eric 的 12 個月內創結構與對應撥款，並以此作為 Eric 接下來 12 個月專責推進第一關的固定對價。
+在此期間，Eric 持續扛北美電商主責，並以第一關為新增主導目標，維持高密度推進節奏。
+由 Eric 負責 Care+ 第一關，並由子公司 CEO Sophia 依既定驗收指標複查。
+第一關先把試片耗材回補與收入回收做出來；Sophia 複查後，再由我決定是否進入下一階段。</p>
+          <p class="mt-4 text-sm text-slate-400">
+            按下上方按鈕只會開啟草稿或複製文字，不會直接寄出。
           </p>
         </div>
       </div>
@@ -1008,6 +1058,12 @@
 
   <script>
     const PASSCODE = "NEWCO";
+    const APPROVAL_TEXT = `Go.
+
+請 HR 依本提案啟動 Eric 的 12 個月內創結構與對應撥款，並以此作為 Eric 接下來 12 個月專責推進第一關的固定對價。
+在此期間，Eric 持續扛北美電商主責，並以第一關為新增主導目標，維持高密度推進節奏。
+由 Eric 負責 Care+ 第一關，並由子公司 CEO Sophia 依既定驗收指標複查。
+第一關先把試片耗材回補與收入回收做出來；Sophia 複查後，再由我決定是否進入下一階段。`;
     let chartsInitialized = false;
 
     function initCharts() {
@@ -1105,6 +1161,41 @@
       }
     };
 
+    function setApprovalStatus(message) {
+      const status = document.getElementById("approval-status");
+      if (!status) return;
+      status.textContent = message;
+      window.clearTimeout(setApprovalStatus.timer);
+      setApprovalStatus.timer = window.setTimeout(() => {
+        status.textContent = "";
+      }, 2800);
+    }
+
+    function openApprovalDraft() {
+      const subject = "Care+ 第一關｜Go";
+      const mailto = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(APPROVAL_TEXT)}`;
+      window.location.href = mailto;
+      setApprovalStatus("已開啟郵件草稿");
+    }
+
+    async function copyApprovalText() {
+      try {
+        await navigator.clipboard.writeText(APPROVAL_TEXT);
+        setApprovalStatus("已複製核准文字");
+      } catch (error) {
+        const fallback = document.createElement("textarea");
+        fallback.value = APPROVAL_TEXT;
+        fallback.setAttribute("readonly", "");
+        fallback.style.position = "absolute";
+        fallback.style.left = "-9999px";
+        document.body.appendChild(fallback);
+        fallback.select();
+        document.execCommand("copy");
+        document.body.removeChild(fallback);
+        setApprovalStatus("已複製核准文字");
+      }
+    }
+
     function initDecisionFlow() {
       const tabs = Array.from(document.querySelectorAll(".decision-tab"));
       const panels = Array.from(document.querySelectorAll(".decision-panel"));
@@ -1128,6 +1219,8 @@
       activate("overview");
     }
 
+    document.getElementById("open-approval-draft").addEventListener("click", openApprovalDraft);
+    document.getElementById("copy-approval-text").addEventListener("click", copyApprovalText);
     initDecisionFlow();
     checkSavedAccess();
 
