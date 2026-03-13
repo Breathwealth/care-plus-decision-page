@@ -1025,14 +1025,17 @@
       </div>
 
       <div class="mt-8 approval-dock p-8 md:p-10">
-        <div class="eyebrow mb-4">一鍵開啟後續</div>
-        <h3 class="font-serif text-3xl md:text-4xl font-bold text-slate-900 mb-4">如果決定 go，後續不用自己重寫</h3>
+        <div class="eyebrow mb-4">核准後續</div>
+        <h3 class="font-serif text-3xl md:text-4xl font-bold text-slate-900 mb-4">如果決定往下走，後續可以直接啟動</h3>
         <p class="text-lg text-slate-600 max-w-3xl leading-relaxed">
-          想往下走時，不需要再自己整理一句批准話術。下面兩個動作已經把最順的後續接好了：一個直接開啟郵件草稿，一個直接複製核准文字。
+          這裡已經把最順的核准口徑接好。往下走時，不需要再另外整理批准文字；可直接開啟郵件草稿，或先複製核准內容。
         </p>
+        <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-4 py-2 text-sm font-semibold text-slate-600">
+          建議收件人：HR、Eric
+        </div>
         <div class="mt-8 flex flex-col sm:flex-row gap-3">
-          <button type="button" id="open-approval-draft" class="approval-button approval-button-primary">開啟核准信草稿</button>
-          <button type="button" id="copy-approval-text" class="approval-button approval-button-secondary">複製核准文字</button>
+          <button type="button" id="open-approval-draft" class="approval-button approval-button-primary">開啟核准郵件草稿</button>
+          <button type="button" id="copy-approval-text" class="approval-button approval-button-secondary">複製核准郵件內容</button>
         </div>
         <div id="approval-status" class="approval-status mt-4" aria-live="polite"></div>
         <div class="mt-6 rounded-[1.5rem] bg-slate-950 p-6 md:p-8 text-slate-100">
@@ -1180,7 +1183,7 @@
     }
 
     function openApprovalDraft() {
-      const subject = "Care+ 第一關｜Go";
+      const subject = "Care+ 第一關核准與啟動通知";
       const mailto = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(APPROVAL_TEXT)}`;
       window.location.href = mailto;
       setApprovalStatus("已開啟郵件草稿");
