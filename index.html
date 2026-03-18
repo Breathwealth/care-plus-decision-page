@@ -525,11 +525,101 @@
       background: linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(29, 78, 216, 0.9));
       color: #f8fafc;
     }
+    .exec-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+    }
+    .exec-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.36), rgba(15, 23, 42, 0.18));
+      padding: 1.15rem 1.2rem;
+      text-align: left;
+      backdrop-filter: blur(10px);
+    }
+    .exec-card::after {
+      content: "";
+      position: absolute;
+      inset: auto -10% -55% auto;
+      width: 8rem;
+      height: 8rem;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.12), transparent 68%);
+      pointer-events: none;
+    }
+    .exec-kicker {
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(191, 219, 254, 0.8);
+    }
+    .exec-number {
+      margin-top: 0.65rem;
+      font-family: "Noto Serif TC", serif;
+      font-size: 2rem;
+      font-weight: 900;
+      line-height: 1;
+      color: #ffffff;
+    }
+    .exec-note {
+      margin-top: 0.55rem;
+      font-size: 0.92rem;
+      line-height: 1.55;
+      color: rgba(226, 232, 240, 0.86);
+    }
+    .target-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+    .target-card {
+      border-radius: 1.5rem;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(248, 250, 252, 0.92));
+      padding: 1.25rem;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.05);
+    }
+    .target-chip {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 9999px;
+      background: #e0f2fe;
+      color: #0c4a6e;
+      padding: 0.3rem 0.7rem;
+      font-size: 0.74rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .danger-panel {
+      border-radius: 1.75rem;
+      border: 1px solid rgba(251, 191, 36, 0.26);
+      background: linear-gradient(135deg, rgba(120, 53, 15, 0.96), rgba(127, 29, 29, 0.92));
+      color: #fef3c7;
+      box-shadow: 0 20px 50px rgba(120, 53, 15, 0.2);
+    }
+    .cadence-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+    .cadence-card {
+      border-radius: 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(15, 23, 42, 0.22);
+      padding: 1rem 1.1rem;
+    }
     @media (max-width: 768px) {
       .decision-tab {
         width: 100%;
         min-width: 0;
       }
+      .exec-grid,
+      .target-grid,
+      .cadence-grid,
       .metric-row,
       .summary-line {
         grid-template-columns: 1fr;
@@ -609,14 +699,37 @@
         先把試片耗材回補做順，重新把回補關係抓回品牌手上，再把這套模式複製到更多耗材型補充
       </p>
 
+      <div class="exec-grid max-w-5xl mx-auto mb-8">
+        <div class="exec-card">
+          <div class="exec-kicker">12 個月最大投入</div>
+          <div class="exec-number">330 萬</div>
+          <div class="exec-note">固定對價 180 萬，加啟動與成果回報 150 萬，上限清楚。</div>
+        </div>
+        <div class="exec-card">
+          <div class="exec-kicker">180 天要看到</div>
+          <div class="exec-number">MVP 上線</div>
+          <div class="exec-note">回補入口、提醒流程、相容防錯與追蹤骨架都要落地，不再只停在概念。</div>
+        </div>
+        <div class="exec-card">
+          <div class="exec-kicker">年度最低驗收</div>
+          <div class="exec-number">4 項指標</div>
+          <div class="exec-note">回補營收、錯買與客服摩擦、沉睡客回流、追蹤覆蓋率都要有目標值。</div>
+        </div>
+        <div class="exec-card">
+          <div class="exec-kicker">如果不做</div>
+          <div class="exec-number">再漏 1 年</div>
+          <div class="exec-note">既有收入繼續流失，客服與錯買成本續吃毛利，前端 CAC 也更難回收。</div>
+        </div>
+      </div>
+
       <div id="decision" class="glass-panel rounded-[2rem] p-6 md:p-8 text-left max-w-4xl mx-auto">
         <div class="quote-mark mb-3">“</div>
         <p class="text-lg md:text-[1.1rem] text-slate-100 leading-relaxed font-medium">
-          這次提案真正希望公司決定的，是公司要不要正式投資一個已在第一線獨立經營多年、且已被現場淬鍊成熟的能力，
+          這次提案真正希望公司決定的，不是要不要多開一個專案，
+          而是要不要正式投資一個已在第一線被驗證過的能力，
           用 12 個月、可驗收、可停損的方式，替 Care+ 跑出第一關。<br><br>
-          我過去幾年本就持續在第一線主責北美電商；
-          因此，公司今天不是在承擔新的體制成本，而是在既有高效率作業基礎上，
-          買下一個有機會先替子公司止血、再為集團打開新能力入口的試點。<br><br>
+          我過去幾年持續主責北美電商，因此公司今天不是在承擔一套全新體制成本，
+          而是在既有高效率作業基礎上，買下一個先替子公司止血、再為集團打開新入口的試點。<br><br>
           <span class="font-bold text-white">今天真正要決定的，是要不要正式投資第一關。</span>
         </p>
         <div class="mt-5 rounded-2xl border border-white/10 bg-black/15 p-5 text-blue-50 leading-relaxed">
@@ -713,10 +826,23 @@
                 </div>
                 <h3 class="font-serif text-3xl md:text-4xl font-bold text-slate-900 mb-4">真正值得被接住的，不是又一個提案，而是一個已成熟的一線能力</h3>
                 <div class="space-y-4 text-slate-700 text-lg leading-relaxed">
-                  <p>越是在亂的時候，越需要有人先把眼前的問題接起來。這一關不是多開一個案子，而是先替子公司把每天都在流失的收入與客戶關係接回來，再替集團留下下一條能往前走的路。</p>
-                  <p>這不是憑感覺猜方向，而是根據這幾年的客服紀錄、第一線經營經驗與深度網路研究，整理出來最靠近客人、也最靠近現金流的入口。</p>
-                  <p>今天最大的成本不是做這件事，而是明知道錢在漏，卻讓它繼續漏一年。第一關不需要先重做大系統，也不需要先養大團隊，所以它天然就適合先用小比例資本配置去驗證。</p>
-                  <p>公司今天買的，是把一個已在第一線被反覆驗證的高槓桿做法，正式投資化、驗收化。</p>
+                  <p>越是在亂的時候，越需要先把眼前正在漏的錢接起來。這一關不是多開一個案子，而是先替子公司把每天流失的收入與客戶關係接回來，再替集團留下下一條能往前走的路。</p>
+                  <p>這不是憑感覺猜方向，而是從客服紀錄、第一線經營經驗與市場研究整理出來，最靠近客人、最靠近現金流的入口。</p>
+                  <p>今天最大的成本不是做，而是不做。第一關不需要先重做大系統，也不需要先養大團隊，所以很適合用小比例資本先驗證。</p>
+                </div>
+                <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div class="rounded-2xl border border-slate-200 bg-white/80 p-5">
+                    <div class="text-xs uppercase tracking-[0.22em] text-slate-400 mb-2">老闆今天批什麼</div>
+                    <div class="font-semibold text-slate-900">批 330 萬上限與 12 個月驗證窗口</div>
+                  </div>
+                  <div class="rounded-2xl border border-slate-200 bg-white/80 p-5">
+                    <div class="text-xs uppercase tracking-[0.22em] text-slate-400 mb-2">180 天看什麼</div>
+                    <div class="font-semibold text-slate-900">MVP、首批回補訂單、週追數據板</div>
+                  </div>
+                  <div class="rounded-2xl border border-slate-200 bg-white/80 p-5">
+                    <div class="text-xs uppercase tracking-[0.22em] text-slate-400 mb-2">年底驗收什麼</div>
+                    <div class="font-semibold text-slate-900">至少回本，且客服摩擦與錯買率同步下降</div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -782,21 +908,24 @@
                 <div class="mt-4 rounded-2xl border border-white/10 bg-slate-950/30 p-5 text-blue-50 leading-relaxed">
                   而這個安排成立的前提，就是我必須維持專責與專注。這類第一關要跑得快，通常也更適合維持既有的獨立推進節奏，而不是重新嵌回常規內部協作；如果把我拉回內部慢下來，買到的就不會是現在這個效率模型。
                 </div>
-                <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div class="time-band">
-                    <div class="text-xs uppercase tracking-[0.2em] text-blue-100/70 mb-2">既有主責</div>
-                    <div class="font-semibold text-white mb-2">北美電商基本盤持續扛</div>
-                    <p class="text-sm text-blue-100/80 leading-relaxed">維持原本營運節奏，不讓既有現金流與責任空掉。</p>
-                  </div>
-                  <div class="time-band">
-                    <div class="text-xs uppercase tracking-[0.2em] text-blue-100/70 mb-2">新增主導目標</div>
-                    <div class="font-semibold text-white mb-2">第一關固定深度推進</div>
-                    <p class="text-sm text-blue-100/80 leading-relaxed">用固定 block 推進 MVP、驗證與調整，而不是零碎地兼做。</p>
-                  </div>
-                  <div class="time-band">
-                    <div class="text-xs uppercase tracking-[0.2em] text-blue-100/70 mb-2">輕量支援</div>
-                    <div class="font-semibold text-white mb-2">執行雜務不占滿主腦</div>
-                    <p class="text-sm text-blue-100/80 leading-relaxed">必要支援由我統籌，讓我的主要價值放在判斷、節奏與關鍵推進。</p>
+                <div class="mt-6 rounded-[1.5rem] border border-white/10 bg-white/10 p-5">
+                  <div class="text-xs uppercase tracking-[0.22em] text-blue-100/70 mb-3">12 個月運作框架</div>
+                  <div class="cadence-grid">
+                    <div class="cadence-card">
+                      <div class="text-xs uppercase tracking-[0.2em] text-blue-100/70 mb-2">既有主責</div>
+                      <div class="font-semibold text-white mb-2">北美電商基本盤持續扛</div>
+                      <p class="text-sm text-blue-100/80 leading-relaxed">維持原本營運節奏，不讓既有現金流與既有責任空掉。</p>
+                    </div>
+                    <div class="cadence-card">
+                      <div class="text-xs uppercase tracking-[0.2em] text-blue-100/70 mb-2">每週固定配置</div>
+                      <div class="font-semibold text-white mb-2">2 個深度 block + 1 次週檢視</div>
+                      <p class="text-sm text-blue-100/80 leading-relaxed">第一關不是零碎兼做，而是每週固定推進產品、驗證與調整。</p>
+                    </div>
+                    <div class="cadence-card">
+                      <div class="text-xs uppercase tracking-[0.2em] text-blue-100/70 mb-2">每月可管理節點</div>
+                      <div class="font-semibold text-white mb-2">1 次 KPI 回顧 + 下一月調整</div>
+                      <p class="text-sm text-blue-100/80 leading-relaxed">讓 Sophia 與公司看得到節奏、成果與是否需要修正範圍。</p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -869,6 +998,21 @@
           <div class="signal-label mb-3">第一關的本質</div>
           <div class="signal-value">不是新 App</div>
           <p class="mt-3 text-slate-600 leading-relaxed">公司買到的是一套輕量回補引擎：提醒、導回、防錯與追蹤，不是重型系統重建。</p>
+        </div>
+      </div>
+
+      <div class="danger-panel p-6 md:p-7 mb-10">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 items-start">
+          <div>
+            <div class="text-xs uppercase tracking-[0.24em] text-amber-200/80 mb-3">如果不做，代價是什麼</div>
+            <div class="font-serif text-3xl font-bold text-white">不是少一個專案，而是繼續容忍已知漏水。</div>
+          </div>
+          <div class="text-sm leading-relaxed text-amber-50/90">
+            每再拖一年，既有補貨營收持續流失，品牌和客戶的回補關係也會繼續落在品牌外。
+          </div>
+          <div class="text-sm leading-relaxed text-amber-50/90">
+            同時客服摩擦、錯買、逆物流與前端 CAC 回收不足，都會繼續默默吃掉毛利，而不會自己改善。
+          </div>
         </div>
       </div>
 
@@ -1000,17 +1144,27 @@
               <div class="text-xs uppercase tracking-[0.24em] text-blue-100 mb-2">Design Principle</div>
               <div class="text-white font-semibold">低整合、低阻力、先見現金，再決定值不值得重做系統。</div>
             </div>
+            <div class="mt-4 rounded-2xl border border-white/15 bg-slate-950/20 p-5">
+              <div class="text-xs uppercase tracking-[0.24em] text-blue-100/75 mb-2">交付物要長什麼樣</div>
+              <div class="text-white font-semibold mb-3">不是寫策略 memo，而是做出一條真的能回補的路。</div>
+              <ul class="space-y-2 text-sm text-blue-100/85">
+                <li>1. 一個可直接導回的回補入口</li>
+                <li>2. 一套提醒與導流訊息模板</li>
+                <li>3. 一個相容導引與防錯機制</li>
+                <li>4. 一個每週可追的漏損與回補 dashboard</li>
+              </ul>
+            </div>
           </div>
 
           <div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
             <div class="feature-card bg-white text-slate-800 rounded-[1.5rem] p-6 shadow-panel">
               <h3 class="text-xl font-bold text-teal-600 mb-4">第一關聚焦做</h3>
               <ul class="space-y-3 font-medium">
-                <li>試片耗材回補入口</li>
-                <li>試片用量節點提醒與導回</li>
-                <li>正確耗材回補捷徑</li>
-                <li>相容導引與防錯</li>
-                <li>品牌內相鄰品類延伸入口</li>
+                <li>回補專頁與正確 SKU 導購入口</li>
+                <li>試片用量節點提醒與導回訊息</li>
+                <li>客服可共用的補貨捷徑與口徑</li>
+                <li>相容導引、防錯與 FAQ</li>
+                <li>漏損來源與回補轉換追蹤 dashboard</li>
               </ul>
             </div>
 
@@ -1237,27 +1391,53 @@
         </div>
 
         <div class="mt-6 section-shell rounded-[1.5rem] p-6 text-slate-700">
+          <div class="text-xs uppercase tracking-[0.24em] text-slate-400 mb-3">4 項年度驗收目標值</div>
+          <div class="target-grid">
+            <div class="target-card">
+              <div class="target-chip">Target 1</div>
+              <div class="mt-3 font-semibold text-slate-900">回補營收回收至少回本</div>
+              <p class="mt-2 text-sm text-slate-600">12 個月內，由第一關直接或可歸因回補的營收，至少達到總投入 330 萬等級，代表這不是只有方向對，而是商業上站得住。</p>
+            </div>
+            <div class="target-card">
+              <div class="target-chip">Target 2</div>
+              <div class="mt-3 font-semibold text-slate-900">相關客服與錯買工單率下降 20%</div>
+              <p class="mt-2 text-sm text-slate-600">和回補、相容性相關的客服摩擦與錯買工單，至少比基期下降 20%，證明不是只把錢接回來，也有把營運摩擦降下來。</p>
+            </div>
+            <div class="target-card">
+              <div class="target-chip">Target 3</div>
+              <div class="mt-3 font-semibold text-slate-900">沉睡客回流 10%，二次購買率提升 15%</div>
+              <p class="mt-2 text-sm text-slate-600">對已沉睡但仍具回補潛力的客群，要看到實際回流；對被導回的補貨客，要看到二次購買率改善，證明關係重新回到品牌手上。</p>
+            </div>
+            <div class="target-card">
+              <div class="target-chip">Target 4</div>
+              <div class="mt-3 font-semibold text-slate-900">90% 回補路徑可追蹤、可週追</div>
+              <p class="mt-2 text-sm text-slate-600">提醒、導回、下單、錯買與客服事件都要進同一張週追 dashboard，避免年底只剩故事，沒有可管理的數字。</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6 section-shell rounded-[1.5rem] p-6 text-slate-700">
           <div class="text-xs uppercase tracking-[0.24em] text-slate-400 mb-3">驗收與停損</div>
           <div class="timeline-strip">
             <div class="timeline-node">
               <div class="rounded-2xl border border-slate-200 bg-white/80 p-5 h-full">
                 <div class="text-sm uppercase tracking-[0.18em] text-slate-400 mb-2">90 天</div>
                 <div class="font-semibold text-slate-900 mb-2">把第一關做成看得見的東西</div>
-                <p class="text-sm text-slate-600">完成 MVP、回補入口上線、補貨提醒與導流追蹤骨架，讓第一關不再只是概念。</p>
+                <p class="text-sm text-slate-600">完成 MVP、回補入口上線、至少一條提醒流程、以及可檢視的追蹤骨架，讓第一關不再只是概念。</p>
               </div>
             </div>
             <div class="timeline-node">
               <div class="rounded-2xl border border-slate-200 bg-white/80 p-5 h-full">
                 <div class="text-sm uppercase tracking-[0.18em] text-slate-400 mb-2">180 天</div>
                 <div class="font-semibold text-slate-900 mb-2">跑出可追的中期訊號</div>
-                <p class="text-sm text-slate-600">至少要有首批回補訂單、相容防錯有效運作、以及可週追的營運節奏，否則不應擴大投入。</p>
+                <p class="text-sm text-slate-600">至少要有首批回補訂單、相容防錯有效運作、回補路徑大致可追，以及固定週追節奏，否則不應擴大投入。</p>
               </div>
             </div>
             <div class="timeline-node">
               <div class="rounded-2xl border border-slate-200 bg-white/80 p-5 h-full">
                 <div class="text-sm uppercase tracking-[0.18em] text-slate-400 mb-2">365 天</div>
                 <div class="font-semibold text-slate-900 mb-2">用商業結果而不是故事驗收</div>
-                <p class="text-sm text-slate-600">以回補訂單、營收回收、客服與錯買成本下降、沉睡用戶回流與二次購買率提升作為年度驗收。</p>
+                <p class="text-sm text-slate-600">以回補營收回本、客服與錯買率下降、沉睡用戶回流與二次購買率提升作為年度驗收。</p>
               </div>
             </div>
           </div>
@@ -1273,18 +1453,23 @@
             </div>
             <div class="metric-row">
               <div class="font-semibold text-slate-900">回補訂單與營收回收</div>
-              <div class="text-sm text-slate-600">至少可持續追蹤</div>
+              <div class="text-sm text-slate-600">12 個月內至少回本</div>
               <div class="text-sm text-slate-500">證明第一關不是只把流量導回，而是真的把錢接回來。</div>
             </div>
             <div class="metric-row">
               <div class="font-semibold text-slate-900">相容防錯與客服摩擦下降</div>
-              <div class="text-sm text-slate-600">至少看到下降趨勢</div>
+              <div class="text-sm text-slate-600">相關工單率下降 20%</div>
               <div class="text-sm text-slate-500">證明這不是只有賣更多，而是連同營運成本一起改善。</div>
             </div>
             <div class="metric-row">
               <div class="font-semibold text-slate-900">沉睡用戶回流與二次購買率</div>
-              <div class="text-sm text-slate-600">至少形成穩定樣本</div>
+              <div class="text-sm text-slate-600">回流 10%，二購率提升 15%</div>
               <div class="text-sm text-slate-500">證明回補關係重新回到品牌手上，而不是一次性交易。</div>
+            </div>
+            <div class="metric-row">
+              <div class="font-semibold text-slate-900">回補路徑可追蹤率</div>
+              <div class="text-sm text-slate-600">90% 事件可進週追 dashboard</div>
+              <div class="text-sm text-slate-500">證明這個案子進入可管理狀態，而不是等年底才回頭解釋發生了什麼。</div>
             </div>
           </div>
         </div>
