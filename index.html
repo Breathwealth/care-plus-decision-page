@@ -402,10 +402,150 @@
       gap: 0.9rem;
       justify-content: center;
     }
+    .signal-card {
+      border-radius: 1.5rem;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(248, 250, 252, 0.92));
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.06);
+    }
+    .signal-label {
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #64748b;
+    }
+    .signal-value {
+      font-family: "Noto Serif TC", serif;
+      font-size: 2rem;
+      font-weight: 800;
+      line-height: 1.1;
+      color: #0f172a;
+    }
+    .metric-table {
+      overflow: hidden;
+      border-radius: 1.5rem;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.06);
+    }
+    .metric-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.8fr) minmax(0, 1.6fr);
+      gap: 1rem;
+      padding: 1rem 1.2rem;
+      align-items: center;
+    }
+    .metric-row + .metric-row {
+      border-top: 1px solid rgba(226, 232, 240, 0.9);
+    }
+    .leakage-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.9rem;
+    }
+    .leakage-pill {
+      border-radius: 1rem;
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      background: rgba(248, 250, 252, 0.9);
+      padding: 0.9rem 1rem;
+    }
+    .flow-step {
+      position: relative;
+      overflow: hidden;
+      border-radius: 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.08);
+      padding: 1.2rem;
+    }
+    .flow-step::after {
+      content: "";
+      position: absolute;
+      inset: auto -15% -55% auto;
+      width: 9rem;
+      height: 9rem;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.16), transparent 68%);
+      pointer-events: none;
+    }
+    .time-band {
+      border-radius: 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(15, 23, 42, 0.16);
+      padding: 1rem 1.1rem;
+    }
+    .timeline-strip {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+    .timeline-strip::before {
+      content: "";
+      position: absolute;
+      left: 8%;
+      right: 8%;
+      top: 1.25rem;
+      height: 2px;
+      background: linear-gradient(90deg, rgba(59, 130, 246, 0.2), rgba(59, 130, 246, 0.55), rgba(20, 184, 166, 0.35));
+    }
+    .timeline-node {
+      position: relative;
+      z-index: 1;
+      padding-top: 2.4rem;
+    }
+    .timeline-node::before {
+      content: "";
+      position: absolute;
+      top: 0.65rem;
+      left: 1.1rem;
+      width: 1.2rem;
+      height: 1.2rem;
+      border-radius: 9999px;
+      background: linear-gradient(135deg, #2563eb, #14b8a6);
+      box-shadow: 0 0 0 8px rgba(219, 234, 254, 0.9);
+    }
+    .summary-table {
+      overflow: hidden;
+      border-radius: 1.75rem;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(248, 250, 252, 0.94));
+      box-shadow: 0 22px 50px rgba(15, 23, 42, 0.06);
+    }
+    .summary-line {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1.2fr);
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      align-items: center;
+    }
+    .summary-line + .summary-line {
+      border-top: 1px solid rgba(226, 232, 240, 0.9);
+    }
+    .summary-total {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(29, 78, 216, 0.9));
+      color: #f8fafc;
+    }
     @media (max-width: 768px) {
       .decision-tab {
         width: 100%;
         min-width: 0;
+      }
+      .metric-row,
+      .summary-line {
+        grid-template-columns: 1fr;
+      }
+      .leakage-list,
+      .timeline-strip {
+        grid-template-columns: 1fr;
+      }
+      .timeline-strip::before {
+        display: none;
+      }
+      .timeline-node {
+        padding-top: 0;
+      }
+      .timeline-node::before {
+        display: none;
       }
     }
   </style>
@@ -642,6 +782,23 @@
                 <div class="mt-4 rounded-2xl border border-white/10 bg-slate-950/30 p-5 text-blue-50 leading-relaxed">
                   而這個安排成立的前提，就是我必須維持專責與專注。這類第一關要跑得快，通常也更適合維持既有的獨立推進節奏，而不是重新嵌回常規內部協作；如果把我拉回內部慢下來，買到的就不會是現在這個效率模型。
                 </div>
+                <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div class="time-band">
+                    <div class="text-xs uppercase tracking-[0.2em] text-blue-100/70 mb-2">既有主責</div>
+                    <div class="font-semibold text-white mb-2">北美電商基本盤持續扛</div>
+                    <p class="text-sm text-blue-100/80 leading-relaxed">維持原本營運節奏，不讓既有現金流與責任空掉。</p>
+                  </div>
+                  <div class="time-band">
+                    <div class="text-xs uppercase tracking-[0.2em] text-blue-100/70 mb-2">新增主導目標</div>
+                    <div class="font-semibold text-white mb-2">第一關固定深度推進</div>
+                    <p class="text-sm text-blue-100/80 leading-relaxed">用固定 block 推進 MVP、驗證與調整，而不是零碎地兼做。</p>
+                  </div>
+                  <div class="time-band">
+                    <div class="text-xs uppercase tracking-[0.2em] text-blue-100/70 mb-2">輕量支援</div>
+                    <div class="font-semibold text-white mb-2">執行雜務不占滿主腦</div>
+                    <p class="text-sm text-blue-100/80 leading-relaxed">必要支援由我統籌，讓我的主要價值放在判斷、節奏與關鍵推進。</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -697,6 +854,24 @@
         </p>
       </div>
 
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 mb-10">
+        <div class="signal-card p-6">
+          <div class="signal-label mb-3">決策最少要看的數字</div>
+          <div class="signal-value">3 個</div>
+          <p class="mt-3 text-slate-600 leading-relaxed">正式核准前，至少補上每月補貨詢問量、回補流失率、與保守年漏損估算，讓這案子從方向正確變成財務上也說得過去。</p>
+        </div>
+        <div class="signal-card p-6">
+          <div class="signal-label mb-3">現況機會成本</div>
+          <div class="signal-value">再拖 12 個月</div>
+          <p class="mt-3 text-slate-600 leading-relaxed">代表既有回補收入繼續流失、客服與錯買成本持續吃毛利，前端已買進來的客戶也繼續沒有被吃乾淨。</p>
+        </div>
+        <div class="signal-card p-6">
+          <div class="signal-label mb-3">第一關的本質</div>
+          <div class="signal-value">不是新 App</div>
+          <p class="mt-3 text-slate-600 leading-relaxed">公司買到的是一套輕量回補引擎：提醒、導回、防錯與追蹤，不是重型系統重建。</p>
+        </div>
+      </div>
+
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center section-shell rounded-[2rem] p-8 md:p-10">
         <div>
           <h3 class="font-serif text-2xl md:text-3xl font-bold text-slate-800 mb-6">現在最明顯的四個漏點</h3>
@@ -732,6 +907,37 @@
             <div class="chart-container">
               <canvas id="leakageChart"></canvas>
             </div>
+            <div class="mt-5 leakage-list">
+              <div class="leakage-pill">
+                <div class="flex items-center justify-between gap-4">
+                  <div class="font-semibold text-slate-800">補貨中斷</div>
+                  <div class="text-rose-600 font-extrabold">40%</div>
+                </div>
+                <div class="mt-2 text-sm text-slate-500">現階段假設權重最高，代表最先值得驗證的漏點。</div>
+              </div>
+              <div class="leakage-pill">
+                <div class="flex items-center justify-between gap-4">
+                  <div class="font-semibold text-slate-800">沉睡用戶</div>
+                  <div class="text-orange-600 font-extrabold">25%</div>
+                </div>
+                <div class="mt-2 text-sm text-slate-500">前端已花出去的 CAC 沒有被後續回補關係吃回來。</div>
+              </div>
+              <div class="leakage-pill">
+                <div class="flex items-center justify-between gap-4">
+                  <div class="font-semibold text-slate-800">相容性錯買</div>
+                  <div class="text-amber-600 font-extrabold">20%</div>
+                </div>
+                <div class="mt-2 text-sm text-slate-500">錯買不只少賣一筆，還會帶出客服、退貨與逆物流成本。</div>
+              </div>
+              <div class="leakage-pill">
+                <div class="flex items-center justify-between gap-4">
+                  <div class="font-semibold text-slate-800">未擴張品類</div>
+                  <div class="text-teal-600 font-extrabold">15%</div>
+                </div>
+                <div class="mt-2 text-sm text-slate-500">這是第二層上行，不是第一關先要靠它成立。</div>
+              </div>
+            </div>
+            <p class="mt-4 text-xs leading-relaxed text-slate-500">註：現階段比例為漏損驗證排序假設，用來協助決策，不代表最終財務結論；正式核准前可補入實際盤點值。</p>
           </div>
         </div>
       </div>
@@ -750,6 +956,10 @@
               <p>而只要是耗材型產品，回補斷掉、買錯與沒被持續經營，本來就是共通問題。</p>
               <p>第一關不必碰敏感資料，也不必先改醫療或總部流程。</p>
               <p>因此它能用相對低成本先驗證，贏了再放大。</p>
+            </div>
+            <div class="mt-6 rounded-[1.5rem] border border-white/10 bg-white/10 p-5 text-blue-50">
+              <div class="text-xs uppercase tracking-[0.24em] text-blue-100/80 mb-3">如果維持現狀</div>
+              <p class="leading-relaxed">最壞的情況不是少做一個專案，而是繼續用目前的漏水結構跑一年：同樣花流量成本、同樣接客服摩擦、同樣看著回補關係從品牌手上流走。</p>
             </div>
           </div>
           <div class="glass-panel rounded-[1.75rem] p-6">
@@ -813,6 +1023,23 @@
                 <li>一開始就做完整訂閱平台</li>
               </ul>
             </div>
+          </div>
+        </div>
+        <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="flow-step">
+            <div class="text-xs uppercase tracking-[0.22em] text-blue-100/75 mb-3">Step 1</div>
+            <div class="text-xl font-bold mb-2">提醒補貨時刻</div>
+            <p class="text-blue-100/85 leading-relaxed">在用量接近補貨點時，用最輕量的方式把用戶喚回品牌，不讓補貨需求在沉默中流失。</p>
+          </div>
+          <div class="flow-step">
+            <div class="text-xs uppercase tracking-[0.22em] text-blue-100/75 mb-3">Step 2</div>
+            <div class="text-xl font-bold mb-2">導回正確入口</div>
+            <p class="text-blue-100/85 leading-relaxed">不是讓客人自己找，而是直接把人帶回正確回補頁、正確 SKU、正確相容選項。</p>
+          </div>
+          <div class="flow-step">
+            <div class="text-xs uppercase tracking-[0.22em] text-blue-100/75 mb-3">Step 3</div>
+            <div class="text-xl font-bold mb-2">追蹤與防錯</div>
+            <p class="text-blue-100/85 leading-relaxed">把回補轉換、相容防呆與後續延伸購買都留在可追蹤的框架裡，讓第一關能被驗收。</p>
           </div>
         </div>
       </div>
@@ -910,6 +1137,33 @@
         </p>
       </div>
 
+      <div class="summary-table mb-8">
+        <div class="summary-line">
+          <div>
+            <div class="text-xs uppercase tracking-[0.22em] text-slate-400 mb-1">固定對價</div>
+            <div class="font-semibold text-slate-900">12 個月專責推進費</div>
+          </div>
+          <div class="text-2xl font-serif font-bold text-slate-900">180萬</div>
+          <div class="text-sm text-slate-500">每月 15 萬，買的是 Eric 對第一關的穩定主導責任。</div>
+        </div>
+        <div class="summary-line">
+          <div>
+            <div class="text-xs uppercase tracking-[0.22em] text-slate-400 mb-1">啟動與中期</div>
+            <div class="font-semibold text-slate-900">立案 + 180 天里程碑</div>
+          </div>
+          <div class="text-2xl font-serif font-bold text-slate-900">80萬</div>
+          <div class="text-sm text-slate-500">啟動 50 萬，180 天 MVP 與中期訊號 30 萬，不把全部上行壓到最後。</div>
+        </div>
+        <div class="summary-line summary-total">
+          <div>
+            <div class="text-xs uppercase tracking-[0.22em] text-blue-100/70 mb-1">12 個月最大投入</div>
+            <div class="font-semibold">固定成本 + 全部成果獎金</div>
+          </div>
+          <div class="text-2xl font-serif font-bold">330萬</div>
+          <div class="text-sm text-blue-50/85">其中 150 萬屬於里程碑與成果回報，主要上行仍綁在是否真的做出結果。</div>
+        </div>
+      </div>
+
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <div class="feature-card bg-white/85 rounded-[1.75rem] soft-card border border-slate-200 p-8 text-center">
           <div class="text-slate-500 font-bold tracking-[0.2em] mb-2 uppercase">每月固定對價</div>
@@ -984,26 +1238,54 @@
 
         <div class="mt-6 section-shell rounded-[1.5rem] p-6 text-slate-700">
           <div class="text-xs uppercase tracking-[0.24em] text-slate-400 mb-3">驗收與停損</div>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div class="rounded-2xl border border-slate-200 bg-white/80 p-5">
-              <div class="text-sm uppercase tracking-[0.18em] text-slate-400 mb-2">90 天</div>
-              <div class="font-semibold text-slate-900 mb-2">建立第一關骨架</div>
-              <p class="text-sm">完成 MVP、回補入口上線，以及導流與追蹤機制建立。</p>
+          <div class="timeline-strip">
+            <div class="timeline-node">
+              <div class="rounded-2xl border border-slate-200 bg-white/80 p-5 h-full">
+                <div class="text-sm uppercase tracking-[0.18em] text-slate-400 mb-2">90 天</div>
+                <div class="font-semibold text-slate-900 mb-2">把第一關做成看得見的東西</div>
+                <p class="text-sm text-slate-600">完成 MVP、回補入口上線、補貨提醒與導流追蹤骨架，讓第一關不再只是概念。</p>
+              </div>
             </div>
-            <div class="rounded-2xl border border-slate-200 bg-white/80 p-5">
-              <div class="text-sm uppercase tracking-[0.18em] text-slate-400 mb-2">180 天</div>
-              <div class="font-semibold text-slate-900 mb-2">驗證中期可行性</div>
-              <p class="text-sm">達成首批回補轉換、驗證相容導引有效性，並建立核心營運節奏。</p>
+            <div class="timeline-node">
+              <div class="rounded-2xl border border-slate-200 bg-white/80 p-5 h-full">
+                <div class="text-sm uppercase tracking-[0.18em] text-slate-400 mb-2">180 天</div>
+                <div class="font-semibold text-slate-900 mb-2">跑出可追的中期訊號</div>
+                <p class="text-sm text-slate-600">至少要有首批回補訂單、相容防錯有效運作、以及可週追的營運節奏，否則不應擴大投入。</p>
+              </div>
             </div>
-            <div class="rounded-2xl border border-slate-200 bg-white/80 p-5">
-              <div class="text-sm uppercase tracking-[0.18em] text-slate-400 mb-2">365 天</div>
-              <div class="font-semibold text-slate-900 mb-2">用結果驗收</div>
-              <p class="text-sm">以回補訂單、營收回收、錯買與客服成本下降、沉睡用戶回流與二次購買率提升作為年度驗收。</p>
+            <div class="timeline-node">
+              <div class="rounded-2xl border border-slate-200 bg-white/80 p-5 h-full">
+                <div class="text-sm uppercase tracking-[0.18em] text-slate-400 mb-2">365 天</div>
+                <div class="font-semibold text-slate-900 mb-2">用商業結果而不是故事驗收</div>
+                <p class="text-sm text-slate-600">以回補訂單、營收回收、客服與錯買成本下降、沉睡用戶回流與二次購買率提升作為年度驗收。</p>
+              </div>
             </div>
           </div>
           <div class="mt-4 rounded-2xl border border-amber-200 bg-amber-50 p-5">
             <div class="font-semibold text-slate-900 mb-2">停損機制</div>
             <p>若於 180 天未達核心中期驗收門檻，公司得停止下一階段投入，或調整試點範圍與執行方式。</p>
+          </div>
+          <div class="mt-4 metric-table">
+            <div class="metric-row bg-slate-50/90">
+              <div class="text-xs uppercase tracking-[0.22em] text-slate-400 font-bold">驗收項目</div>
+              <div class="text-xs uppercase tracking-[0.22em] text-slate-400 font-bold">最低要求</div>
+              <div class="text-xs uppercase tracking-[0.22em] text-slate-400 font-bold">為什麼重要</div>
+            </div>
+            <div class="metric-row">
+              <div class="font-semibold text-slate-900">回補訂單與營收回收</div>
+              <div class="text-sm text-slate-600">至少可持續追蹤</div>
+              <div class="text-sm text-slate-500">證明第一關不是只把流量導回，而是真的把錢接回來。</div>
+            </div>
+            <div class="metric-row">
+              <div class="font-semibold text-slate-900">相容防錯與客服摩擦下降</div>
+              <div class="text-sm text-slate-600">至少看到下降趨勢</div>
+              <div class="text-sm text-slate-500">證明這不是只有賣更多，而是連同營運成本一起改善。</div>
+            </div>
+            <div class="metric-row">
+              <div class="font-semibold text-slate-900">沉睡用戶回流與二次購買率</div>
+              <div class="text-sm text-slate-600">至少形成穩定樣本</div>
+              <div class="text-sm text-slate-500">證明回補關係重新回到品牌手上，而不是一次性交易。</div>
+            </div>
           </div>
         </div>
 
@@ -1041,7 +1323,7 @@
         <div class="mt-6 rounded-[1.5rem] bg-slate-950 p-6 md:p-8 text-slate-100">
           <p id="approval-preview" class="leading-relaxed whitespace-pre-line">Go.
 
-請 HR 依本提案啟動 Eric 的 12 個月內創結構與對應撥款，並以此作為 Eric 接下來 12 個月專責推進第一關的固定對價。
+請 HR 依本提案啟動 Eric 的 12 個月內創結構與對應撥款，固定對價為每月新台幣 15 萬元，另包含啟動里程碑 50 萬元、180 天 MVP 里程碑 30 萬元與年度成果獎金 70 萬元。
 在此期間，Eric 持續扛北美電商主責，並以第一關為新增主導目標，維持高密度推進節奏。
 由 Eric 負責 Care+ 第一關，並由子公司 CEO Sophia 依既定驗收指標複查。
 第一關先把試片耗材回補與收入回收做出來；Sophia 複查後，再由我決定是否進入下一階段。</p>
@@ -1071,7 +1353,7 @@
     const PASSCODE = "NEWCO";
     const APPROVAL_TEXT = `Go.
 
-請 HR 依本提案啟動 Eric 的 12 個月內創結構與對應撥款，並以此作為 Eric 接下來 12 個月專責推進第一關的固定對價。
+請 HR 依本提案啟動 Eric 的 12 個月內創結構與對應撥款，固定對價為每月新台幣 15 萬元，另包含啟動里程碑 50 萬元、180 天 MVP 里程碑 30 萬元與年度成果獎金 70 萬元。
 在此期間，Eric 持續扛北美電商主責，並以第一關為新增主導目標，維持高密度推進節奏。
 由 Eric 負責 Care+ 第一關，並由子公司 CEO Sophia 依既定驗收指標複查。
 第一關先把試片耗材回補與收入回收做出來；Sophia 複查後，再由我決定是否進入下一階段。`;
