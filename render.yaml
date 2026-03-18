@@ -1,6 +1,0 @@
-services:
-  - type: web
-    name: care-plus-decision-page
-    runtime: static
-    buildCommand: ""
-    staticPublishPath: .
